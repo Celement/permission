@@ -75,7 +75,7 @@ spring:
     #发送者邮箱
     username: 916939772@qq.com
     #申请到的授权码
-    password: vubvftwbyjndfddh
+    password: jcoemceqhtpfbbff
     #端口号465或587（QQ邮箱）
     port: 465
     #默认的邮件编码为UTF-8
@@ -97,11 +97,11 @@ spring:
       # Redis数据库索引（默认为0）
       database: 1
       # Redis服务器地址
-      host: 127.0.0.1
+      host: 192.168.200.128
       # Redis服务器连接端口
       port: 6379
       # Redis服务器连接密码（默认为空）
-      password:
+      password: redis_JaXBiy
       # 连接超时时间
       timeout: 10s
       lettuce:

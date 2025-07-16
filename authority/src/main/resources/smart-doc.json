@@ -1,0 +1,7 @@
+{  "serverUrl": "http://localhost:9090",
+  "outPath": "src/main/resources/static/doc",
+  "coverOld": true,
+  "debugEnv": true,
+  "isStrict": false,
+  "skipEmptyPath": true
+}

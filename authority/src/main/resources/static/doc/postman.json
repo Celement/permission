@@ -1,0 +1,149 @@
+{
+  "info": {
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_postman_id": "a0157926-f793-4107-a4b1-47e4ee9496f6",
+    "name": "smart-doc"
+  },
+  "item": [
+    {
+      "name": "Interface name is not set.",
+      "item": [
+        {
+          "name": "登录接口",
+          "request": {
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"gema.green\",\n  \"password\": \"5imche\",\n  \"code\": \"74640\",\n  \"token\": \"jvv77p\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:9090/auth/login",
+              "protocol": "http",
+              "path": [
+                "auth",
+                "login"
+              ],
+              "host": [
+                "localhost"
+              ],
+              "port": "9090",
+              "query": [],
+              "variable": []
+            },
+            "description": "登录接口",
+            "header": []
+          },
+          "description": "登录接口"
+        },
+        {
+          "name": "验证码接口",
+          "request": {
+            "method": "GET",
+            "body": {
+              "mode": "formdata"
+            },
+            "url": {
+              "raw": "http://localhost:9090/auth/captcha",
+              "protocol": "http",
+              "path": [
+                "auth",
+                "captcha"
+              ],
+              "host": [
+                "localhost"
+              ],
+              "port": "9090",
+              "query": [],
+              "variable": []
+            },
+            "description": "验证码接口",
+            "header": []
+          },
+          "description": "验证码接口"
+        },
+        {
+          "name": "判断会话是否登录",
+          "request": {
+            "method": "GET",
+            "body": {
+              "mode": "formdata"
+            },
+            "url": {
+              "raw": "http://localhost:9090/auth/isLogin",
+              "protocol": "http",
+              "path": [
+                "auth",
+                "isLogin"
+              ],
+              "host": [
+                "localhost"
+              ],
+              "port": "9090",
+              "query": [],
+              "variable": []
+            },
+            "description": "判断会话是否登录",
+            "header": []
+          },
+          "description": "判断会话是否登录"
+        },
+        {
+          "name": "token信息",
+          "request": {
+            "method": "GET",
+            "body": {
+              "mode": "formdata"
+            },
+            "url": {
+              "raw": "http://localhost:9090/auth/tokenInfo",
+              "protocol": "http",
+              "path": [
+                "auth",
+                "tokenInfo"
+              ],
+              "host": [
+                "localhost"
+              ],
+              "port": "9090",
+              "query": [],
+              "variable": []
+            },
+            "description": "token信息",
+            "header": []
+          },
+          "description": "token信息"
+        },
+        {
+          "name": "Interface name is not set.",
+          "request": {
+            "method": "GET",
+            "body": {
+              "mode": "formdata"
+            },
+            "url": {
+              "raw": "http://localhost:9090/auth/authInfo",
+              "protocol": "http",
+              "path": [
+                "auth",
+                "authInfo"
+              ],
+              "host": [
+                "localhost"
+              ],
+              "port": "9090",
+              "query": [],
+              "variable": []
+            },
+            "description": "",
+            "header": []
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -4,7 +4,9 @@ import cn.dev33.satoken.stp.StpInterface;
 import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.pp.authority.common.Constant;
+import com.pp.authority.entity.Permission;
 import com.pp.authority.entity.Role;
+import com.pp.authority.entity.RolePermission;
 import com.pp.authority.service.PermissionServcice;
 import com.pp.authority.service.RolePermissionService;
 import com.pp.authority.service.RoleService;
@@ -40,11 +42,31 @@ public class StpInterfaceImpl implements StpInterface {
     @Override
     public List<String> getPermissionList(Object loginId, String loginType) {
         //先从redis内存数据库中取数据
-//        if (ObjectUtil.isNotEmpty(redisUtils.hget(Constant.PERMISSION_PREFIX,String.valueOf(loginId)))){
-//           log.info("redis中获取到了数据");
-//           return (List<String>)redisUtils.hget(Constant.PERMISSION_PREFIX,String.valueOf(loginId));
-//        }
-        return null;
+        if (ObjectUtil.isNotEmpty(redisUtils.hget(Constant.PERMISSION_PREFIX,String.valueOf(loginId)))){
+           log.info("redis中获取到了数据");
+           return (List<String>)redisUtils.hget(Constant.PERMISSION_PREFIX,String.valueOf(loginId));
+        }
+        List<Long> userRoleIds = userRoleService.getRoleIds(loginId, loginType);
+        if (userRoleIds.size()==0){
+            return new ArrayList<>();
+        }
+        List<Role> roles = roleService.list(new LambdaQueryWrapper<Role>().in(Role::getId, userRoleIds).eq(Role::getStatu, 1l));
+        if (roles.size()==0){
+            return new ArrayList<>();
+        }
+        //构造查询条件
+        LambdaQueryWrapper<RolePermission> rolePermissionLambdaQueryWrapper=new LambdaQueryWrapper<RolePermission>().in(RolePermission::getRoleId,roles.stream().map(Role::getId).collect(Collectors.toList()));
+        //基于roleid获取Permissionid
+        List<Long> permissionids = rolePermissionService.list(rolePermissionLambdaQueryWrapper).stream().map(RolePermission::getPermissionId).collect(Collectors.toList());
+        if (permissionids.size()==0){
+            return new ArrayList<>();
+        }
+        //permissionids去查询permissionList
+        List<String>  permissionPersList=permissionServcice.listByIds(permissionids).stream().filter(permission -> permission.getStatu()==1l).map(Permission::getPerms).collect(Collectors.toList());
+        if (ObjectUtil.isNotEmpty(permissionPersList)){
+            redisUtils.hset(Constant.PERMISSION_PREFIX,(String)loginId,permissionPersList,192192 );
+        }
+        return permissionPersList;
     }
 
     /**

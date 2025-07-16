@@ -5,8 +5,10 @@ import cn.dev33.satoken.stp.StpUtil;
 import cn.dev33.satoken.util.SaResult;
 import cn.hutool.captcha.CaptchaUtil;
 import cn.hutool.captcha.ShearCaptcha;
+import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.util.ObjectUtil;
+import cn.hutool.core.util.RandomUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.pp.authority.annotations.ClearPerms;
 import com.pp.authority.annotations.IgnoreParam;
@@ -15,11 +17,13 @@ import com.pp.authority.common.Constant;
 import com.pp.authority.common.Result;
 import com.pp.authority.entity.User;
 import com.pp.authority.entity.dto.LoginDto;
+import com.pp.authority.entity.dto.MailBean;
+import com.pp.authority.exception.EmailException;
 import com.pp.authority.service.PermissionServcice;
 import com.pp.authority.service.UserService;
 import com.pp.authority.utils.MailUtil;
 import com.pp.authority.utils.RedisUtils;
-import io.swagger.v3.oas.annotations.tags.Tag;
+
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +34,6 @@ import org.springframework.web.bind.annotation.*;
 import java.security.Permissions;
 import java.util.UUID;
 
-@Tag(name = "认证鉴权")
 @RestController
 @RequestMapping("/auth")
 @Slf4j
@@ -43,9 +46,17 @@ public class AuthController {
     private RedisUtils redisUtils;
 
     @Resource
+    private MailUtil mailUtil;
+
+    @Resource
 
     private PermissionServcice permissionServcice;
 
+    /**
+     * 登录接口
+     * @param loginDto
+     * @return SaResult
+     */
     @PostMapping("/login")
     @IgnoreParam
     @IgoreResult
@@ -73,7 +84,11 @@ public class AuthController {
         return SaResult.data(tokenInfo);
 
     }
-    //验证码接口
+
+    /**
+     * 验证码接口
+     * @return Result
+     */
     @GetMapping("/captcha")
     public Result getCaptcha(){
 
@@ -108,20 +123,31 @@ public class AuthController {
 //        );
     }
 
-    //查询用户登录状态
+    /**
+     *  判断会话是否登录
+      * @return String
+     */
     @GetMapping("isLogin")
     @ClearPerms
     public String  isLogin(){
         User user=userService.getUserInfo();
         return  "当前会话是否登录:"+StpUtil.isLogin();
     }
-    //查询token信息
+
+    /**
+     * token信息
+     * @return SaResult
+     */
     @GetMapping("/tokenInfo")
     @ClearPerms(value = true)
     public SaResult tokenInfo(){
         return SaResult.data(StpUtil.getTokenInfo());
     }
-    //获取认证信息
+
+    /*
+     * 权限验证
+     * @return SaResult
+     */
     @GetMapping("/authInfo")
     public SaResult getPerms(){
 
@@ -134,4 +160,53 @@ public class AuthController {
                         .build()
         );
     }
+
+    /**
+     * 退出登录
+     * @return
+     */
+    @GetMapping("/logout")
+    @ClearPerms(value = true)
+    public SaResult loginOut(){
+       StpUtil.logout();
+       return SaResult.ok();
+    }
+
+    /**
+     * 发送邮箱验证码
+     *
+     */
+    @GetMapping("/email/{username}")
+    public Result getEmailCode(@PathVariable String  username){
+        //查询数据库
+        LambdaQueryWrapper<User> queryWrapper = new LambdaQueryWrapper<>();
+        //找用户名是否存在
+        queryWrapper.eq(User::getUsername,username);
+        User user = userService.getOne(queryWrapper);
+        //
+        if (null==user){
+            throw new EmailException("账户名错误:请你核对一下重新输入");
+        }
+        //查询到了用户但是没有绑定邮箱抛出异常提示
+        if ("".equals(user.getEmail())){
+            throw new EmailException("邮箱为空");
+        }
+
+        //判断发送验证码的时间发送过就不发送了
+        if (redisUtils.hget(Constant.EMAIL_PREFIX,user.getUsername())!=null){
+            throw new EmailException("验证码以及发送到你的邮箱了不要重复发送");
+        }
+        //生成随机的数字
+        String code = RandomUtil.randomNumbers(5);
+        MailBean mailBean = new MailBean();
+        mailBean.setRecipient(user.getEmail());
+        mailBean.setSubject("找回密码");
+        mailBean.setContent("重置邮箱验证码为:"+code+"请在五分钟内使用不要泄露"+ DateUtil.now());
+        mailUtil.sendSimpleMail(mailBean);
+
+        redisUtils.hset(Constant.EMAIL_PREFIX,user.getUsername(),code,300);
+        return Result.success();
+    }
+
+
 }
