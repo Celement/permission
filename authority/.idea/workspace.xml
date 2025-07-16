@@ -95,7 +95,8 @@
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.2",
     "settings.editor.selected.configurable": "MavenSettings",
-    "vue.rearranger.settings.migration": "true"
+    "vue.rearranger.settings.migration": "true",
+    "应用程序.com.pp.authority.utils.DataGeneratorUtil.executor": "Run"
   }
 }]]></component>
   <component name="ReactorSettings">
@@ -123,7 +124,7 @@
       <recent name="com.example.authority.service" />
     </key>
   </component>
-  <component name="RunManager" selected="应用程序.com.pp.authority.utils.DataGeneratorUtil">
+  <component name="RunManager" selected="Spring Boot.AuthorityApplication">
     <configuration name="DataGeneratorUtil" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.example.authority.utils.DataGeneratorUtil" />
       <module name="authority" />
@@ -192,8 +193,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="应用程序.com.pp.authority.utils.DataGeneratorUtil" />
         <item itemvalue="Spring Boot.AuthorityApplication" />
+        <item itemvalue="应用程序.com.pp.authority.utils.DataGeneratorUtil" />
         <item itemvalue="npm.dev" />
         <item itemvalue="npm.format" />
       </list>
@@ -301,7 +302,7 @@
       <workItem from="1752454954646" duration="18682000" />
       <workItem from="1752541499597" duration="6590000" />
       <workItem from="1752551964173" duration="4196000" />
-      <workItem from="1752627873668" duration="6281000" />
+      <workItem from="1752627873668" duration="9838000" />
     </task>
     <task id="LOCAL-00001" summary="添加忽略文件配置">
       <option name="closed" value="true" />

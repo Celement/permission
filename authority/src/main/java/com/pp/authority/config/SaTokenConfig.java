@@ -41,6 +41,8 @@ public class SaTokenConfig implements WebMvcConfigurer {
                 addExclude("/v3/api-docs/**").
                 addExclude("/auth/captcha").
                 addExclude("/druid/**").
+                addExclude("/doc.html/**").
+                addExclude("/webjars/**").
                 addExclude("/cache/**")
                 .addExclude("/file/**").
                 addExclude("/auth/register")
