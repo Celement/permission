@@ -16,11 +16,15 @@ import com.pp.authority.annotations.IgoreResult;
 import com.pp.authority.common.Constant;
 import com.pp.authority.common.Result;
 import com.pp.authority.entity.User;
+import com.pp.authority.entity.UserRole;
 import com.pp.authority.entity.dto.LoginDto;
 import com.pp.authority.entity.dto.MailBean;
+import com.pp.authority.entity.dto.RegisterDto;
 import com.pp.authority.exception.EmailException;
 import com.pp.authority.service.PermissionServcice;
+import com.pp.authority.service.UserRoleService;
 import com.pp.authority.service.UserService;
+import com.pp.authority.service.impl.UserRoleServiceImpl;
 import com.pp.authority.utils.MailUtil;
 import com.pp.authority.utils.RedisUtils;
 
@@ -32,6 +36,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Permissions;
+import java.util.HashMap;
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -51,6 +57,8 @@ public class AuthController {
     @Resource
 
     private PermissionServcice permissionServcice;
+    @Autowired
+    private UserRoleService userRoleService;
 
     /**
      * 登录接口
@@ -107,7 +115,7 @@ public class AuthController {
         log.info(shearCaptcha.getCode());
         log.info("token值:");
         log.info(key);
-        redisUtils.hset(Constant.CAPTCHA_PREFIX,key,shearCaptcha.getCode(),120);
+        redisUtils.hset(Constant.CAPTCHA_PREFIX,key,shearCaptcha.getCode(),1200);
         return Result.success(
                 MapUtil.builder()
                         .put("token",key)
@@ -206,6 +214,87 @@ public class AuthController {
 
         redisUtils.hset(Constant.EMAIL_PREFIX,user.getUsername(),code,300);
         return Result.success();
+    }
+    /**
+     * 注册用户
+     */
+    @PostMapping("/register")
+    public Result register(@RequestBody RegisterDto  registerDto){
+        log.info("注册用户");
+        log.info(registerDto.getCode());
+        log.info(registerDto.getToken());
+        //通过传递过来的token
+        Object hget = redisUtils.hget(Constant.CAPTCHA_PREFIX, registerDto.getToken());
+        log.info(hget.toString());
+        String code=(String)redisUtils.hget(Constant.CAPTCHA_PREFIX,registerDto.getToken());
+        log.info("redis");
+        log.info(code);
+        //删除掉redis的记录
+        redisUtils.hdel(Constant.CAPTCHA_PREFIX,registerDto.getToken());
+        if (!code.equals(registerDto.getCode())){
+            return Result.error("验证码错误");
+        }
+        //构造条件基于username查询
+        LambdaQueryWrapper<User> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(User::getUsername,registerDto.getUsername());
+
+        List<User> users = userService.list(queryWrapper);
+
+        //判断一下拥有该名字的用户是否大于0大于0就提醒用户更换
+        if (users.size()>0){
+            return Result.error("账户名已经存在,请更换");
+        }
+        //在根据邮箱进行查询
+        LambdaQueryWrapper<User> lambdaQueryWrapper = new LambdaQueryWrapper<>();
+        List<User> userList = userService.list(lambdaQueryWrapper.eq(User::getEmail, registerDto.getEmail()));
+        //查询邮箱记录
+        if (userList.size()>0){
+            throw new EmailException("邮箱已经被其他用户占用,请更换");
+        }else {
+            //进行保存
+           User  user
+                   = new User().setPassword(passwordEncoder.encode(registerDto.getPassword()))
+                    .setAvatar(registerDto.getAvatar())
+                    .setNickname(registerDto.getNickname())
+                   .setUsername(registerDto.getUsername())
+                    .setPhone(registerDto.getPhone())
+                    .setEmail(registerDto.getEmail())
+                    .setStatu(1l);
+           userService.saveOrUpdate(user);
+           //对用户关联的表页要保存记录
+            UserRole userRole = new UserRole().setRoleId(Constant.DEFAULT_ROLE)
+                    .setUserId(user.getId());
+
+            userRoleService.saveOrUpdate(userRole);
+
+        }
+
+        return Result.success();
+
+    }
+
+
+    /**
+     * 修改密码的功能
+     */
+
+    @PostMapping("/repassword")
+    @ClearPerms(value = true)
+    public Result repassword(@RequestBody HashMap<String,String> passwordMap){
+        //获取当前的用户
+        User user = userService.getUserInfo();
+        //和原密码进行校验
+        if (!passwordEncoder.matches(passwordMap.get("oldpass"),user.getPassword())){
+            return  Result.error("原始密码错误");
+        }
+        //判断两次输入密码是否一致
+        if (!passwordMap.get("password").equals(passwordMap.get("checkPass"))){
+            return Result.error("两次密码输入不一致");
+        }
+        //重置密码
+        user.setPassword(passwordEncoder.encode(passwordMap.get("password")));
+        //保存返回
+        return Result.success(userService.saveOrUpdate(user));
     }
 
 
