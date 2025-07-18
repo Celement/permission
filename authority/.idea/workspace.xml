@@ -37,6 +37,12 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "Celement"
+  }
+}]]></component>
   <component name="GitSEFilterConfiguration">
     <file-type-list>
       <filtered-out-file-type name="LOCAL_BRANCH" />
@@ -44,6 +50,14 @@
       <filtered-out-file-type name="TAG" />
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
+  </component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="273b905b-9a01-40d4-8c2d-cc416f67e6e2" />
+        <option name="url" value="https://github.com/Celement/permission.git" />
+      </UrlAndAccount>
+    </option>
   </component>
   <component name="GoLibraries">
     <option name="indexEntireGoPath" value="false" />
@@ -94,7 +108,7 @@
     &quot;RunOnceActivity.go.formatter.settings.were.checked&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.go.migrated.go.modules.settings&quot;: &quot;true&quot;,
     &quot;Spring Boot.AuthorityApplication.executor&quot;: &quot;Run&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;9aa1f6e5&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;3ec41b26&quot;,
     &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
@@ -318,7 +332,8 @@
       <workItem from="1752715047169" duration="5630000" />
       <workItem from="1752723569091" duration="3000" />
       <workItem from="1752724056576" duration="4803000" />
-      <workItem from="1752801436964" duration="4343000" />
+      <workItem from="1752801436964" duration="4471000" />
+      <workItem from="1752806105040" duration="714000" />
     </task>
     <task id="LOCAL-00001" summary="添加忽略文件配置">
       <option name="closed" value="true" />
