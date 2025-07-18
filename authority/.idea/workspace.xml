@@ -24,18 +24,13 @@
   </component>
   <component name="Git.Settings">
     <option name="PUSH_AUTO_UPDATE" value="true" />
-    <option name="PUSH_TAGS">
-      <GitPushTagMode>
-        <option name="argument" value="--tags" />
-        <option name="title" value="All" />
-      </GitPushTagMode>
-    </option>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
         <entry key="$PROJECT_DIR$/.." value="85af5bd8fcd3ab791f40039b268ed279b868565e" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="GitHubPullRequestSearchHistory"><![CDATA[{
   "lastFilter": {
@@ -92,38 +87,38 @@
     <option name="showLibraryContents" value="true" />
     <option name="showMembers" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Maven.authority [clean].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.authority [com.github.shalousun:smart-doc-maven-plugin:2.2.7:html].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.authority [com.github.shalousun:smart-doc-maven-plugin:2.2.7:markdown].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.authority [com.github.shalousun:smart-doc-maven-plugin:2.2.7:postman].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.authority [com.ly.smart-doc:smart-doc-maven-plugin:3.1.1:markdown].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.authority [org.apache.maven.plugins:maven-clean-plugin:3.2.0:clean].executor&quot;: &quot;Run&quot;,
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.formatter.settings.were.checked&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.migrated.go.modules.settings&quot;: &quot;true&quot;,
-    &quot;Spring Boot.AuthorityApplication.executor&quot;: &quot;Run&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;3ec41b26&quot;,
-    &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;问题&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;MavenSettings&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;,
-    &quot;应用程序.com.pp.authority.utils.DataGeneratorUtil.executor&quot;: &quot;Run&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Maven.authority [clean].executor": "Run",
+    "Maven.authority [com.github.shalousun:smart-doc-maven-plugin:2.2.7:html].executor": "Run",
+    "Maven.authority [com.github.shalousun:smart-doc-maven-plugin:2.2.7:markdown].executor": "Run",
+    "Maven.authority [com.github.shalousun:smart-doc-maven-plugin:2.2.7:postman].executor": "Run",
+    "Maven.authority [com.ly.smart-doc:smart-doc-maven-plugin:3.1.1:markdown].executor": "Run",
+    "Maven.authority [org.apache.maven.plugins:maven-clean-plugin:3.2.0:clean].executor": "Run",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.go.formatter.settings.were.checked": "true",
+    "RunOnceActivity.go.migrated.go.modules.settings": "true",
+    "Spring Boot.AuthorityApplication.executor": "Run",
+    "git-widget-placeholder": "6e7e5961",
+    "go.import.settings.migrated": "true",
+    "kotlin-language-version-configured": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "问题",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "MavenSettings",
+    "vue.rearranger.settings.migration": "true",
+    "应用程序.com.pp.authority.utils.DataGeneratorUtil.executor": "Run"
   }
-}</component>
+}]]></component>
   <component name="ReactorSettings">
     <option name="notificationShown" value="true" />
   </component>
@@ -333,7 +328,7 @@
       <workItem from="1752723569091" duration="3000" />
       <workItem from="1752724056576" duration="4803000" />
       <workItem from="1752801436964" duration="4471000" />
-      <workItem from="1752806105040" duration="714000" />
+      <workItem from="1752806105040" duration="1037000" />
     </task>
     <task id="LOCAL-00001" summary="添加忽略文件配置">
       <option name="closed" value="true" />
