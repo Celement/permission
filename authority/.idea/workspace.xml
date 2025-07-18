@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="96663cad-cdbe-4687-be70-712b6eb22c3d" name="更改" comment="" />
+    <list default="true" id="96663cad-cdbe-4687-be70-712b6eb22c3d" name="更改" comment="编译数据库文档工具包" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -94,7 +94,7 @@
     &quot;RunOnceActivity.go.formatter.settings.were.checked&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.go.migrated.go.modules.settings&quot;: &quot;true&quot;,
     &quot;Spring Boot.AuthorityApplication.executor&quot;: &quot;Run&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;79f31b14&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;9aa1f6e5&quot;,
     &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
@@ -115,6 +115,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.pp.authority.mapper" />
       <recent name="com.pp.authority.service" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
@@ -196,11 +197,11 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="npm.format" />
       <item itemvalue="npm.dev" />
+      <item itemvalue="npm.format" />
       <item itemvalue="Spring Boot.AuthorityApplication" />
-      <item itemvalue="应用程序.com.pp.authority.utils.DataGeneratorUtil" />
       <item itemvalue="应用程序.DataGeneratorUtil" />
+      <item itemvalue="应用程序.com.pp.authority.utils.DataGeneratorUtil" />
     </list>
     <recent_temporary>
       <list>
@@ -315,6 +316,9 @@
       <workItem from="1752551964173" duration="4196000" />
       <workItem from="1752627873668" duration="9838000" />
       <workItem from="1752715047169" duration="5630000" />
+      <workItem from="1752723569091" duration="3000" />
+      <workItem from="1752724056576" duration="4803000" />
+      <workItem from="1752801436964" duration="4343000" />
     </task>
     <task id="LOCAL-00001" summary="添加忽略文件配置">
       <option name="closed" value="true" />
